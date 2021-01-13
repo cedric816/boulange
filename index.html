@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<head>
+    <title>Calcul prod boulange</title>
+    <meta charset="utf-8">
+    <style>
+        *{
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        li {
+            list-style-type: none;
+        }
+        .recette{
+            border: solid black 3px;
+            width: 300px;
+            background-color: rgb(155, 221, 155);
+        }
+        #recette-base{
+            background-color: lightgray;
+            border-bottom: dashed black 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="recetteBaseBlanc" class="recette">
+        <div id="recette-base">
+            <h3>Blanc</h3>
+            <ol>
+                <li>farine: {{farine}}</li>
+                <li>levure: {{levure}}</li>
+                <li>sel: {{sel}}</li>
+                <li>eau: {{eau}}</li>
+                <li>levain: {{levain}}</li>
+                <li><strong>Total pâte: {{totalPate()}} </strong></li>
+                <li><strong>Total pain: {{totalPain()}} </strong></li>
+            </ol>
+        </div>  
+        <h5>Quantité de pain souhaité (en kg):</h5>
+        <input type="number" v-model="quantite" placeholder="quantité de pain">
+        <h5>Quantités d'ingrédients à utiliser (en g):</h5>
+        <ol>
+            <li>farine: {{calculFarine()}}</li>
+            <li>levure: {{calculLevure()}}</li>
+            <li>sel: {{calculSel()}}</li>
+            <li>eau: {{calculEau()}}</li>
+            <li>levain: {{calculLevain()}}</li>
+        </ol>
+    </div>
+    
+    <div id="recetteBaseSemi" class="recette">
+        <div id="recette-base">
+            <h3>Semi-complet</h3>
+            <ol>
+                <li>farine: {{farine}}</li>
+                <li>levure: {{levure}}</li>
+                <li>sel: {{sel}}</li>
+                <li>eau: {{eau}}</li>
+                <li>levain: {{levain}}</li>
+                <li><strong>Total pâte: {{totalPate()}} g</strong></li>
+                <li><strong>Total pain: {{totalPain()}} g</strong></li>
+            </ol>
+        </div>
+        <h5>Quantité de pain souhaité (en kg):</h5>
+        <input type="number" v-model="quantite" placeholder="quantité de pain">
+        <h5>Quantités d'ingrédients à utiliser (en g):</h5>
+        <ol>
+            <li>farine: {{calculFarine()}}</li>
+            <li>levure: {{calculLevure()}}</li>
+            <li>sel: {{calculSel()}}</li>
+            <li>eau: {{calculEau()}}</li>
+            <li>levain: {{calculLevain()}}</li>
+        </ol>
+    </div>
+
+    <div id="recetteBaseComplet" class="recette">
+        <div id="recette-base">
+            <h3>Complet</h3>
+            <ol>
+                <li>farine: {{farine}}</li>
+                <li>levure: {{levure}}</li>
+                <li>sel: {{sel}}</li>
+                <li>eau: {{eau}}</li>
+                <li>levain: {{levain}}</li>
+                <li><strong>Total pâte: {{totalPate()}} g</strong></li>
+                <li><strong>Total pain: {{totalPain()}} g</strong></li>
+            </ol>
+        </div>
+        <h5>Quantité de pain souhaité (en kg):</h5>
+        <input type="number" v-model="quantite" placeholder="quantité de pain">
+        <h5>Quantités d'ingrédients à utiliser (en g):</h5>
+        <ol>
+            <li>farine: {{calculFarine()}}</li>
+            <li>levure: {{calculLevure()}}</li>
+            <li>sel: {{calculSel()}}</li>
+            <li>eau: {{calculEau()}}</li>
+            <li>levain: {{calculLevain()}}</li>
+        </ol>
+    </div>
+
+    <div id="recetteBaseGraines" class="recette">
+        <div id="recette-base">
+            <h3>Graines</h3>
+            <ol>
+                <li>farine: {{farine}}</li>
+                <li>levure: {{levure}}</li>
+                <li>sel: {{sel}}</li>
+                <li>eau: {{eau}}</li>
+                <li>levain: {{levain}}</li>
+                <li>graines: {{graines}}</li>
+                <li><strong>Total pâte: {{totalPate()}} g</strong></li>
+                <li><strong>Total pain: {{totalPain()}} g</strong></li>
+            </ol>
+        </div>
+        <h5>Quantité de pain souhaité (en kg):</h5>
+        <input type="number" v-model="quantite" placeholder="quantité de pain">
+        <h5>Quantités d'ingrédients à utiliser (en g):</h5>
+        <ol>
+            <li>farine: {{calculFarine()}}</li>
+            <li>levure: {{calculLevure()}}</li>
+            <li>sel: {{calculSel()}}</li>
+            <li>eau: {{calculEau()}}</li>
+            <li>levain: {{calculLevain()}}</li>
+            <li>graines: {{calculGraines()}}</li>
+        </ol>
+    </div>
+
+    <div id="recetteBaseEpeautre" class="recette">
+        <div id="recette-base">
+            <h3>Petit épeautre</h3>
+            <ol>
+                <li>farine: {{farine}}</li>
+                <li>levure: {{levure}}</li>
+                <li>sel: {{sel}}</li>
+                <li>eau: {{eau}}</li>
+                <li>levain: {{levain}}</li>
+                <li><strong>Total pâte: {{totalPate()}} g</strong></li>
+                <li><strong>Total pain: {{totalPain()}} g</strong></li>
+            </ol>
+        </div>
+        <h5>Quantité de pain souhaité (en kg):</h5>
+        <input type="number" v-model="quantite" placeholder="quantité de pain">
+        <h5>Quantités d'ingrédients à utiliser (en g):</h5>
+        <ol>
+            <li>farine: {{calculFarine()}}</li>
+            <li>levure: {{calculLevure()}}</li>
+            <li>sel: {{calculSel()}}</li>
+            <li>eau: {{calculEau()}}</li>
+            <li>levain: {{calculLevain()}}</li>
+        </ol>
+    </div>
+
+    <div id="recetteBaseSeigle" class="recette">
+        <div id="recette-base">
+            <h3>Seigle</h3>
+            <ol>
+                <li>farine: {{farine}}</li>
+                <li>levure: {{levure}}</li>
+                <li>sel: {{sel}}</li>
+                <li>eau: {{eau}}</li>
+                <li>levain: {{levain}}</li>
+                <li><strong>Total pâte: {{totalPate()}} g</strong></li>
+                <li><strong>Total pain: {{totalPain()}} g</strong></li>
+            </ol>
+        </div>
+        <h5>Quantité de pain souhaité (en kg):</h5>
+        <input type="number" v-model="quantite" placeholder="quantité de pain">
+        <h5>Quantités d'ingrédients à utiliser (en g):</h5>
+        <ol>
+            <li>farine: {{calculFarine()}}</li>
+            <li>levure: {{calculLevure()}}</li>
+            <li>sel: {{calculSel()}}</li>
+            <li>eau: {{calculEau()}}</li>
+            <li>levain: {{calculLevain()}}</li>
+        </ol>
+    </div>
+
+    <div id="recetteBaseFruits" class="recette">
+        <div id="recette-base">
+            <h3>Fruits</h3>
+            <ol>
+                <li>farine: {{farine}}</li>
+                <li>levure: {{levure}}</li>
+                <li>sel: {{sel}}</li>
+                <li>eau: {{eau}}</li>
+                <li>levain: {{levain}}</li>
+                <li>amandes: {{amande}}</li>
+                <li>noisettes: {{noisette}}</li>
+                <li>raisins: {{raisin}}</li>
+                <li>cranberries: {{cranberries}}</li>
+                <li><strong>Total pâte: {{totalPate()}} g</strong></li>
+                <li><strong>Total pain: {{totalPain()}} g</strong></li>
+            </ol>
+        </div>
+        <h5>Quantité de pain souhaité (en kg):</h5>
+        <input type="number" v-model="quantite" placeholder="quantité de pain">
+        <h5>Quantités d'ingrédients à utiliser (en g):</h5>
+        <ol>
+            <li>farine: {{calculFarine()}}</li>
+            <li>levure: {{calculLevure()}}</li>
+            <li>sel: {{calculSel()}}</li>
+            <li>eau: {{calculEau()}}</li>
+            <li>levain: {{calculLevain()}}</li>
+            <li>Amandes: {{calculAmandes()}}</li>
+            <li>Noisettes: {{calculNoisettes()}}</li>
+            <li>Raisins: {{calculRaisins()}}</li>
+            <li>Cranberries: {{calculCranberries()}}</li>
+        </ol>
+    </div>
+
+    <div id="recetteBaseBrioche" class="recette">
+        <div id="recette-base">
+            <h3>Brioche</h3>
+            <ol>
+                <li>farine: {{farine}}</li>
+                <li>levure: {{levure}}</li>
+                <li>sel: {{sel}}</li>
+                <li>levain: {{levain}}</li>
+                <li>sucre: {{sucre}}</li>
+                <li>lait: {{lait}}</li>
+                <li>oeufs: {{oeuf}}</li>
+                <li>beurre: {{beurre}}</li>
+                <li><strong>Total pâte: {{totalPate()}} g</strong></li>
+                <li><strong>Total pain: {{totalPain()}} g</strong></li>
+            </ol>
+        </div>
+        <h5>Quantité de pain souhaité (en kg):</h5>
+        <input type="number" v-model="quantite" placeholder="quantité de pain">
+        <h5>Quantités d'ingrédients à utiliser (en g):</h5>
+        <ol>
+            <li>farine: {{calculFarine()}}</li>
+            <li>levure: {{calculLevure()}}</li>
+            <li>sel: {{calculSel()}}</li>
+            <li>levain: {{calculLevain()}}</li>
+            <li>Sucre: {{calculSucre()}}</li>
+            <li>Lait: {{calculLait()}}</li>
+            <li>Oeufs: {{calculOeufs()}}</li>
+            <li>Beurre: {{calculBeurre()}}</li>
+        </ol>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        
+    var recetteBaseBlanc = new Vue({
+        el: '#recetteBaseBlanc',
+        data: {
+            farine: 1000,
+            levure: 6,
+            sel: 18,
+            eau: 750,
+            levain: 150,
+            quantite:""
+                },
+        methods: {
+            totalPate: function(){
+                total=this.farine+this.levure+this.sel+this.eau+this.levain;
+                return total;
+            },
+            totalPain: function(){
+            totalPain=this.totalPate()*0.85;
+            return Math.trunc(totalPain);
+            },
+            calculFarine: function(){
+                calculFarine= this.farine/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculFarine);
+            },
+            calculLevure: function(){
+                calculLevure= this.levure/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculLevure);
+            },
+            calculSel: function(){
+                calculSel= this.sel/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculSel);
+            },
+            calculEau: function(){
+                calculEau= this.eau/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculEau);
+            },
+            calculLevain: function(){
+                calculLevain= this.levain/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculLevain);
+            },
+        }
+    })
+    var recetteBaseSemi = new Vue({
+        el: '#recetteBaseSemi',
+        data: {
+            farine: 1000,
+            levure: 6,
+            sel: 18,
+            eau: 750,
+            levain: 150,
+            quantite: ""
+                },
+        methods: {
+            totalPate: function(){
+                total=this.farine+this.levure+this.sel+this.eau+this.levain;
+                return total;
+            },
+            totalPain: function(){
+                totalPain=this.totalPate()*0.85;
+                return Math.trunc(totalPain);
+            },
+            calculFarine: function(){
+                calculFarine= this.farine/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculFarine);
+            },
+            calculLevure: function(){
+                calculLevure= this.levure/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculLevure);
+            },
+            calculSel: function(){
+                calculSel= this.sel/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculSel);
+            },
+            calculEau: function(){
+                calculEau= this.eau/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculEau);
+            },
+            calculLevain: function(){
+                calculLevain= this.levain/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculLevain);
+            },
+        }
+    })
+    var recetteBaseComplet = new Vue({
+        el: '#recetteBaseComplet',
+        data: {
+            farine: 1000,
+            levure: 6,
+            sel: 18,
+            eau: 750,
+            levain: 150,
+            quantite: ""
+                },
+        methods: {
+            totalPate: function(){
+                total=this.farine+this.levure+this.sel+this.eau+this.levain;
+                return total;
+            },
+            totalPain: function(){
+                totalPain=this.totalPate()*0.85;
+                return Math.trunc(totalPain);
+            },
+            calculFarine: function(){
+                calculFarine= this.farine/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculFarine);
+            },
+            calculLevure: function(){
+                calculLevure= this.levure/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculLevure);
+            },
+            calculSel: function(){
+                calculSel= this.sel/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculSel);
+            },
+            calculEau: function(){
+                calculEau= this.eau/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculEau);
+            },
+            calculLevain: function(){
+                calculLevain= this.levain/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculLevain);
+            },
+        }
+    })
+    var recetteBaseGraines = new Vue({
+        el: '#recetteBaseGraines',
+        data: {
+            farine: 1000,
+            levure: 6,
+            sel: 18,
+            eau: 750,
+            levain: 150,
+            graines: 100,
+            quantite: ""
+                },
+        methods: {
+            totalPate: function(){
+                total=this.farine+this.levure+this.sel+this.eau+this.levain+this.graines;
+                return total;
+            },
+            totalPain: function(){
+                totalPain=this.totalPate()*0.85;
+                return Math.trunc(totalPain);
+            },
+            calculFarine: function(){
+                calculFarine= this.farine/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculFarine);
+            },
+            calculLevure: function(){
+                calculLevure= this.levure/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculLevure);
+            },
+            calculSel: function(){
+                calculSel= this.sel/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculSel);
+            },
+            calculEau: function(){
+                calculEau= this.eau/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculEau);
+            },
+            calculLevain: function(){
+                calculLevain= this.levain/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculLevain);
+            },
+            calculGraines: function(){
+                calculGraines= this.graines/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculGraines);
+            }
+        }
+        })
+    var recetteBaseEpeautre = new Vue({
+        el: '#recetteBaseEpeautre',
+        data: {
+            farine: 1000,
+            levure: 20,
+            sel: 16,
+            eau: 700,
+            levain: 100,
+            quantite: ""
+                },
+        methods: {
+            totalPate: function(){
+                total=this.farine+this.levure+this.sel+this.eau+this.levain;
+                return total;
+            },
+            totalPain: function(){
+                totalPain=this.totalPate()*0.85;
+                return Math.trunc(totalPain);
+            },
+            calculFarine: function(){
+                calculFarine= this.farine/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculFarine);
+            },
+            calculLevure: function(){
+                calculLevure= this.levure/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculLevure);
+            },
+            calculSel: function(){
+                calculSel= this.sel/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculSel);
+            },
+            calculEau: function(){
+                calculEau= this.eau/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculEau);
+            },
+            calculLevain: function(){
+                calculLevain= this.levain/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculLevain);
+            },  
+        }
+        })
+    var recetteBaseSeigle = new Vue({
+        el: '#recetteBaseSeigle',
+        data: {
+            farine: 1000,
+            levure: 2,
+            sel: 20,
+            eau: 980,
+            levain: 800,
+            quantite: ""
+                },
+        methods: {
+            totalPate: function(){
+                total=this.farine+this.levure+this.sel+this.eau+this.levain;
+                return total;
+            },
+            totalPain: function(){
+                totalPain=this.totalPate()*0.85;
+                return Math.trunc(totalPain);
+            },
+            calculFarine: function(){
+                calculFarine= this.farine/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculFarine);
+            },
+            calculLevure: function(){
+                calculLevure= this.levure/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculLevure);
+            },
+            calculSel: function(){
+                calculSel= this.sel/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculSel);
+            },
+            calculEau: function(){
+                calculEau= this.eau/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculEau);
+            },
+            calculLevain: function(){
+                calculLevain= this.levain/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculLevain);
+            },
+        }
+        })
+    var recetteBaseFruits = new Vue({
+        el: '#recetteBaseFruits',
+        data: {
+            farine: 1000,
+            levure: 30,
+            sel: 18,
+            eau: 750,
+            levain: 150,
+            amande: 50,
+            noisette: 50,
+            raisin: 75,
+            cranberries: 50,
+            quantite: ""
+                },
+        methods: {
+            totalPate: function(){
+                total=this.farine+this.levure+this.sel+this.eau+this.levain+this.amande+this.noisette+this.raisin+this.cranberries;
+                return total;
+            },
+            totalPain: function(){
+                totalPain=this.totalPate()*0.85;
+                return Math.trunc(totalPain);
+            },
+            calculFarine: function(){
+                calculFarine= this.farine/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculFarine);
+            },
+            calculLevure: function(){
+                calculLevure= this.levure/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculLevure);
+            },
+            calculSel: function(){
+                calculSel= this.sel/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculSel);
+            },
+            calculEau: function(){
+                calculEau= this.eau/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculEau);
+            },
+            calculLevain: function(){
+                calculLevain= this.levain/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculLevain);
+            },
+            calculAmandes: function(){
+                calculAmandes= this.amande/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculAmandes);
+            },
+            calculNoisettes: function(){
+                calculNoisettes= this.noisette/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculNoisettes);
+            },
+            calculRaisins: function(){
+                calculRaisins= this.raisin/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculRaisins);
+            },
+            calculCranberries: function(){
+                calculCranberries= this.cranberries/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculCranberries);
+            }
+        }
+        })
+    var recetteBaseBrioche = new Vue({
+        el: '#recetteBaseBrioche',
+        data: {
+            farine: 1000,
+            levure: 40,
+            sel: 20,
+            levain: 150,
+            sucre: 180,
+            lait: 150,
+            oeuf: 450,
+            beurre: 400,
+            quantite: ""
+                },
+        methods: {
+            totalPate: function(){ total=this.farine+this.levure+this.sel+this.levain+this.sucre+this.lait+this.oeuf+this.beurre;
+                return total;
+            },
+            totalPain: function(){
+                totalPain=this.totalPate()*0.85;
+                return Math.trunc(totalPain);
+            },
+            calculFarine: function(){
+                calculFarine= this.farine/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculFarine);
+            },
+            calculLevure: function(){
+                calculLevure= this.levure/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculLevure);
+            },
+            calculSel: function(){
+                calculSel= this.sel/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculSel);
+            },
+            calculLevain: function(){
+                calculLevain= this.levain/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculLevain);
+            },
+            calculSucre: function(){
+                calculSucre= this.sucre/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculSucre);
+            },
+            calculLait: function(){
+                calculLait= this.lait/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculLait);
+            },
+            calculOeufs: function(){
+                calculOeufs= this.oeuf/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculOeufs);
+            },
+            calculBeurre: function(){
+                calculBeurre= this.beurre/this.totalPain()*this.quantite*1000;
+                return Math.trunc(calculBeurre);
+            },
+        }
+        })
+    </script>
+  
+</body>
